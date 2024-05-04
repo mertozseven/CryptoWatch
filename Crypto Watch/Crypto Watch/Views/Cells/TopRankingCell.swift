@@ -7,19 +7,20 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class TopRankingCell: UICollectionViewCell {
     
     // MARK: - Properties
     static let identifier = "TopRankingCell"
     
+    private var color: String?
+    
     // MARK: - UI Components
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .tertiarySystemBackground
         view.layer.cornerRadius = 10
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray6.cgColor
         
         return view
     }()
@@ -29,7 +30,6 @@ class TopRankingCell: UICollectionViewCell {
         imageview.contentMode = .scaleAspectFit
         imageview.clipsToBounds = true
         imageview.layer.cornerRadius = 20
-        imageview.image = UIHelper.resizeImage(image: UIImage(named: "bitcoin")!, targetSize: CGSize(width: 40, height: 40))
         
         return imageview
     }()
@@ -53,10 +53,18 @@ class TopRankingCell: UICollectionViewCell {
     }
     
     // MARK: - Public Methods
-    public func configure(with coinIcon: UIImage, symbolName: String, coinName: String) {
-        self.coinIcon.image = coinIcon
+    public func configure(with coinUrl: String, symbolName: String, coinName: String, price: String, change: String, color: String) {
+        let url = URL(string: coinUrl)
+        coinIcon.kf.setImage(with: url)
         self.symbolNameLabel.text = symbolName
         self.coinNameLabel.text = coinName
+        self.priceLabel.text = String(format: "%05.4f$", Double(price) ?? 0)
+        let changeComputed = (Double(price) ?? 0) * (Double(change) ?? 0) / 100
+        self.changeLabel.text = String(format: "%%\(change) (%.3f$)", changeComputed)
+        if Double(change) ?? 0 > 0 {
+            changeLabel.textColor = .systemGreen
+        }
+        self.color = color
         configureView()
     }
     
@@ -64,12 +72,7 @@ class TopRankingCell: UICollectionViewCell {
     private func configureView() {
         addViews()
         configureLayout()
-        let allowedCharacters = CharacterSet(charactersIn: "0123456789.,")
-        let filteredText = priceLabel.text?.filter { String($0).rangeOfCharacter(from: allowedCharacters) != nil } ?? ""
-        if let price = Double(filteredText.replacingOccurrences(of: ",", with: "")) {
-            let change = price * -3.12 / 100
-            changeLabel.text = String(format: "%%-3.12 (%.2f$)", change)
-        }
+//        containerView.backgroundColor = UIColor(hex: "\(self.color ?? "")", alpha: 1.0)
     }
     
     private func addViews() {
@@ -84,7 +87,7 @@ class TopRankingCell: UICollectionViewCell {
     private func configureLayout() {
         containerView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(8)
         }
         coinIcon.snp.makeConstraints {
             $0.width.height.equalTo(40)
@@ -92,25 +95,25 @@ class TopRankingCell: UICollectionViewCell {
             $0.centerY.equalToSuperview()
         }
         symbolNameLabel.snp.makeConstraints {
-            $0.centerY.equalTo(coinIcon.snp.centerY).inset(24)
+            $0.top.equalToSuperview().offset(16)
             $0.leading.equalTo(coinIcon.snp.trailing).offset(16)
             $0.trailing.equalTo(containerView.snp.centerX).inset(8)
-            $0.height.equalTo(16)
+            $0.height.equalTo(18)
         }
         coinNameLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(24)
+            $0.bottom.equalToSuperview().inset(16)
             $0.leading.equalTo(coinIcon.snp.trailing).offset(16)
             $0.trailing.equalTo(containerView.snp.centerX).inset(8)
-            $0.height.equalTo(16)
+            $0.height.equalTo(18)
         }
         priceLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview().inset(24)
+            $0.top.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.leading.equalTo(containerView.snp.centerX).offset(8)
             $0.height.equalTo(16)
         }
         changeLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(24)
+            $0.bottom.equalToSuperview().inset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.leading.equalTo(containerView.snp.centerX).offset(8)
             $0.height.equalTo(16)
@@ -130,5 +133,5 @@ class TopRankingCell: UICollectionViewCell {
 }
 
 #Preview {
-    TopRankingCell()
+    RankingListViewController()
 }

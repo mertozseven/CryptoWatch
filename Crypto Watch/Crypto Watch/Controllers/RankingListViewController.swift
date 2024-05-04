@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import SnapKit
+import Alamofire
 
-class RankingListViewController: UIViewController {
+final class RankingListViewController: UIViewController {
+    
+    // MARK: - Properties
+    private var coins: [Coin]?
     
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -26,6 +31,7 @@ class RankingListViewController: UIViewController {
         collectionView.isScrollEnabled = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.backgroundColor = .clear
         collectionView.isUserInteractionEnabled = true
         
         return collectionView
@@ -41,8 +47,9 @@ class RankingListViewController: UIViewController {
     private func configureView() {
         addViews()
         configureLayout()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         navigationController?.setNavigationBarHidden(true, animated: false)
+        getCoins()
     }
     
     private func addViews() {
@@ -70,12 +77,32 @@ class RankingListViewController: UIViewController {
         }
         collectionView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(50 * 96)
+            $0.leading.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(50 * 84)
         }
     }
-
+    
+    private func getCoins() {
+        guard let url = URL(string: Constants.url) else {
+            print("Invalid URL")
+            return
+        }
+        AF.request(url).responseDecodable(of: CoinResults.self) { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response.result {
+            case .success(let welcomeData):
+                self.coins = welcomeData.data?.coins
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print("Error fetching coins: \(error.localizedDescription)")
+            }
+        }
+    }
+    
 }
 
 extension RankingListViewController: UICollectionViewDelegate {
@@ -92,7 +119,12 @@ extension RankingListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopRankingCell.identifier, for: indexPath) as? TopRankingCell else {
             return UICollectionViewCell()
         }
-        
+        if let coin = coins?[indexPath.row], var iconURL = coin.iconURL {
+            if iconURL.contains("svg") {
+                iconURL = iconURL.replacingOccurrences(of: "svg", with: "png")
+            }
+            cell.configure(with: iconURL, symbolName: coin.symbol ?? "", coinName: coin.name ?? "", price: coin.price ?? "", change: coin.change ?? "", color: coin.color ?? "")
+        }
         return cell
     }
     
@@ -102,7 +134,7 @@ extension RankingListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = UIScreen.main.bounds.width - 32
-                return CGSize(width: screenWidth, height: 96)
+        return CGSize(width: screenWidth, height: 84)
     }
     
 }

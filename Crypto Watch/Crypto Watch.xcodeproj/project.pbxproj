@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		962188372BE6EC98000C4C16 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188362BE6EC98000C4C16 /* DetailViewController.swift */; };
 		965DBE072BE4269D00D6F06E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965DBE062BE4269D00D6F06E /* UIHelper.swift */; };
 		965DBE0A2BE4274A00D6F06E /* CWLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965DBE092BE4274A00D6F06E /* CWLabel.swift */; };
+		966795222BE572260042082A /* CoinResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966795212BE572260042082A /* CoinResults.swift */; };
+		966795242BE576860042082A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966795232BE576860042082A /* Constants.swift */; };
+		966795262BE577920042082A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966795252BE577920042082A /* UIColorExtension.swift */; };
 		966D54ED2BE2C890007F9EB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966D54EC2BE2C890007F9EB2 /* AppDelegate.swift */; };
 		966D54EF2BE2C890007F9EB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966D54EE2BE2C890007F9EB2 /* SceneDelegate.swift */; };
 		966D54F12BE2C890007F9EB2 /* RankingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966D54F02BE2C890007F9EB2 /* RankingListViewController.swift */; };
@@ -24,8 +28,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		962188362BE6EC98000C4C16 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		965DBE062BE4269D00D6F06E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		965DBE092BE4274A00D6F06E /* CWLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWLabel.swift; sourceTree = "<group>"; };
+		966795212BE572260042082A /* CoinResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResults.swift; sourceTree = "<group>"; };
+		966795232BE576860042082A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		966795252BE577920042082A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		966D54E92BE2C890007F9EB2 /* Crypto Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crypto Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		966D54EC2BE2C890007F9EB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		966D54EE2BE2C890007F9EB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				965DBE062BE4269D00D6F06E /* UIHelper.swift */,
+				966795232BE576860042082A /* Constants.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -88,7 +97,6 @@
 		966D54EB2BE2C890007F9EB2 /* Crypto Watch */ = {
 			isa = PBXGroup;
 			children = (
-				966D55052BE2CB0F007F9EB2 /* Managers */,
 				966D55002BE2C8CB007F9EB2 /* Model */,
 				966D55012BE2C8D0007F9EB2 /* Views */,
 				966D55022BE2CAED007F9EB2 /* Controllers */,
@@ -103,6 +111,7 @@
 		966D55002BE2C8CB007F9EB2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				966795212BE572260042082A /* CoinResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -121,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				966D54F02BE2C890007F9EB2 /* RankingListViewController.swift */,
+				962188362BE6EC98000C4C16 /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -128,6 +138,7 @@
 		966D55032BE2CAF2007F9EB2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				966795252BE577920042082A /* UIColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -141,13 +152,6 @@
 				966D54F72BE2C891007F9EB2 /* LaunchScreen.storyboard */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		966D55052BE2CB0F007F9EB2 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		966D55132BE2D153007F9EB2 /* Views */ = {
@@ -248,13 +252,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962188372BE6EC98000C4C16 /* DetailViewController.swift in Sources */,
 				966D55152BE2D19F007F9EB2 /* CWTopNavigationView.swift in Sources */,
 				966D54F12BE2C890007F9EB2 /* RankingListViewController.swift in Sources */,
 				965DBE0A2BE4274A00D6F06E /* CWLabel.swift in Sources */,
 				966D54ED2BE2C890007F9EB2 /* AppDelegate.swift in Sources */,
 				966D54EF2BE2C890007F9EB2 /* SceneDelegate.swift in Sources */,
 				966D551A2BE2DF18007F9EB2 /* TopRankingCell.swift in Sources */,
+				966795222BE572260042082A /* CoinResults.swift in Sources */,
+				966795262BE577920042082A /* UIColorExtension.swift in Sources */,
 				965DBE072BE4269D00D6F06E /* UIHelper.swift in Sources */,
+				966795242BE576860042082A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
