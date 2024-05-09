@@ -12,7 +12,7 @@ import Alamofire
 final class RankingListViewController: UIViewController {
     
     // MARK: - Properties
-    private var coins: [Coin]?
+    var viewModel: CoinResultsViewModel
     
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -41,6 +41,15 @@ final class RankingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+    }
+    
+    init(viewModel: CoinResultsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods
@@ -77,8 +86,8 @@ final class RankingListViewController: UIViewController {
         }
         collectionView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(8)
-            $0.trailing.equalToSuperview().inset(8)
+            $0.leading.equalTo(view)
+            $0.trailing.equalTo(view)
             $0.height.equalTo(50 * 84)
         }
     }
@@ -93,7 +102,7 @@ final class RankingListViewController: UIViewController {
             
             switch response.result {
             case .success(let welcomeData):
-                self.coins = welcomeData.data?.coins
+                self.viewModel.coins = (welcomeData.data?.coins)!
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -107,24 +116,27 @@ final class RankingListViewController: UIViewController {
 
 extension RankingListViewController: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedCoin = viewModel.coins?[indexPath.row] else { return }
+        let detailVC = DetailViewController(coin: selectedCoin)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
 }
 
 extension RankingListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        50
+        viewModel.coins?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopRankingCell.identifier, for: indexPath) as? TopRankingCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopRankingCell.identifier, for: indexPath) as? TopRankingCell,
+              let coin = viewModel[indexPath.row] else {
             return UICollectionViewCell()
         }
-        if let coin = coins?[indexPath.row], var iconURL = coin.iconURL {
-            if iconURL.contains("svg") {
-                iconURL = iconURL.replacingOccurrences(of: "svg", with: "png")
-            }
-            cell.configure(with: iconURL, symbolName: coin.symbol ?? "", coinName: coin.name ?? "", price: coin.price ?? "", change: coin.change ?? "", color: coin.color ?? "")
-        }
+        let modifiedCoinIconUrl = URL(string: coin.iconURL!.replacingOccurrences(of: "svg", with: "png"))!
+        cell.configure(with: modifiedCoinIconUrl, symbolName: coin.symbol ?? "", coinName: coin.name ?? "", price: coin.price ?? "", change: coin.change ?? "")
         return cell
     }
     
@@ -139,6 +151,3 @@ extension RankingListViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-#Preview {
-    RankingListViewController()
-}

@@ -38,7 +38,7 @@ class TopRankingCell: UICollectionViewCell {
     
     private let coinNameLabel = CWLabel(text: "Bitcoin", textAlignment: .left, textColor: .label, font: .systemFont(ofSize: 16, weight: .bold))
     
-    private let priceLabel = CWLabel(text: "16000$", textAlignment: .right, textColor: .label, font: .systemFont(ofSize: 16, weight: .bold))
+    private let priceLabel = CWLabel(text: "16000$", textAlignment: .right, textColor: .label, font: .systemFont(ofSize: 18, weight: .bold))
     
     private let changeLabel = CWLabel(text: "-3.6", textAlignment: .right, textColor: .systemRed, font: .systemFont(ofSize: 16, weight: .regular))
     
@@ -53,18 +53,16 @@ class TopRankingCell: UICollectionViewCell {
     }
     
     // MARK: - Public Methods
-    public func configure(with coinUrl: String, symbolName: String, coinName: String, price: String, change: String, color: String) {
-        let url = URL(string: coinUrl)
-        coinIcon.kf.setImage(with: url)
+    public func configure(with coinUrl: URL, symbolName: String, coinName: String, price: String, change: String) {
+        coinIcon.kf.setImage(with: coinUrl)
         self.symbolNameLabel.text = symbolName
         self.coinNameLabel.text = coinName
         self.priceLabel.text = String(format: "%05.4f$", Double(price) ?? 0)
         let changeComputed = (Double(price) ?? 0) * (Double(change) ?? 0) / 100
-        self.changeLabel.text = String(format: "%%\(change) (%.3f$)", changeComputed)
+        self.changeLabel.text = String(format: "%%\(change) (%04.4f$)", changeComputed)
         if Double(change) ?? 0 > 0 {
             changeLabel.textColor = .systemGreen
         }
-        self.color = color
         configureView()
     }
     
@@ -72,7 +70,8 @@ class TopRankingCell: UICollectionViewCell {
     private func configureView() {
         addViews()
         configureLayout()
-//        containerView.backgroundColor = UIColor(hex: "\(self.color ?? "")", alpha: 1.0)
+        changeLabel.minimumScaleFactor = 0.5
+        changeLabel.lineBreakMode = .byCharWrapping
     }
     
     private func addViews() {
@@ -109,14 +108,14 @@ class TopRankingCell: UICollectionViewCell {
         priceLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().inset(16)
-            $0.leading.equalTo(containerView.snp.centerX).offset(8)
+            $0.leading.equalTo(containerView.snp.centerX)
             $0.height.equalTo(16)
         }
         changeLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(16)
             $0.trailing.equalToSuperview().inset(16)
-            $0.leading.equalTo(containerView.snp.centerX).offset(8)
-            $0.height.equalTo(16)
+            $0.leading.equalTo(containerView.snp.centerX)
+            $0.height.equalTo(18)
         }
     }
     
@@ -132,6 +131,3 @@ class TopRankingCell: UICollectionViewCell {
     
 }
 
-#Preview {
-    RankingListViewController()
-}

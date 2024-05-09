@@ -71,7 +71,3 @@ class CWTopNavigationView: UIView {
     }
 
 }
-
-#Preview {
-    CWTopNavigationView()
-}

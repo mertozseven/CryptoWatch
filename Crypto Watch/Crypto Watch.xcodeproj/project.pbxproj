@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9601FCE72BE8F4AA006B945C /* CoinResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601FCE62BE8F4AA006B945C /* CoinResultsViewModel.swift */; };
 		962188372BE6EC98000C4C16 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188362BE6EC98000C4C16 /* DetailViewController.swift */; };
+		962188392BE6F1BF000C4C16 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */; };
 		965DBE072BE4269D00D6F06E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965DBE062BE4269D00D6F06E /* UIHelper.swift */; };
 		965DBE0A2BE4274A00D6F06E /* CWLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965DBE092BE4274A00D6F06E /* CWLabel.swift */; };
 		966795222BE572260042082A /* CoinResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966795212BE572260042082A /* CoinResults.swift */; };
@@ -27,8 +29,23 @@
 		966D551A2BE2DF18007F9EB2 /* TopRankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966D55192BE2DF18007F9EB2 /* TopRankingCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		969474052BEA883000709E19 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9601FCE62BE8F4AA006B945C /* CoinResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsViewModel.swift; sourceTree = "<group>"; };
 		962188362BE6EC98000C4C16 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		965DBE062BE4269D00D6F06E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		965DBE092BE4274A00D6F06E /* CWLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CWLabel.swift; sourceTree = "<group>"; };
 		966795212BE572260042082A /* CoinResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResults.swift; sourceTree = "<group>"; };
@@ -61,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9601FCE52BE8F485006B945C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9601FCE62BE8F4AA006B945C /* CoinResultsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		965DBE052BE4268F00D6F06E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +122,7 @@
 		966D54EB2BE2C890007F9EB2 /* Crypto Watch */ = {
 			isa = PBXGroup;
 			children = (
+				9601FCE52BE8F485006B945C /* ViewModel */,
 				966D55002BE2C8CB007F9EB2 /* Model */,
 				966D55012BE2C8D0007F9EB2 /* Views */,
 				966D55022BE2CAED007F9EB2 /* Controllers */,
@@ -131,6 +157,7 @@
 			children = (
 				966D54F02BE2C890007F9EB2 /* RankingListViewController.swift */,
 				962188362BE6EC98000C4C16 /* DetailViewController.swift */,
+				962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -180,6 +207,7 @@
 				966D54E52BE2C890007F9EB2 /* Sources */,
 				966D54E62BE2C890007F9EB2 /* Frameworks */,
 				966D54E72BE2C890007F9EB2 /* Resources */,
+				969474052BEA883000709E19 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,8 +287,10 @@
 				966D54ED2BE2C890007F9EB2 /* AppDelegate.swift in Sources */,
 				966D54EF2BE2C890007F9EB2 /* SceneDelegate.swift in Sources */,
 				966D551A2BE2DF18007F9EB2 /* TopRankingCell.swift in Sources */,
+				962188392BE6F1BF000C4C16 /* OnboardingViewController.swift in Sources */,
 				966795222BE572260042082A /* CoinResults.swift in Sources */,
 				966795262BE577920042082A /* UIColorExtension.swift in Sources */,
+				9601FCE72BE8F4AA006B945C /* CoinResultsViewModel.swift in Sources */,
 				965DBE072BE4269D00D6F06E /* UIHelper.swift in Sources */,
 				966795242BE576860042082A /* Constants.swift in Sources */,
 			);
@@ -322,6 +352,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -383,6 +414,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

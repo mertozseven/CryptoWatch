@@ -15,7 +15,7 @@ struct CoinResults: Codable {
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let stats: Stats?
+    var stats: Stats?
     var coins: [Coin]?
 }
 
