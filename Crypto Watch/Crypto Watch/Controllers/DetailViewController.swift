@@ -24,10 +24,6 @@ final class DetailViewController: UIViewController {
         return button
     }()
     
-    private let scrollView = UIScrollView()
-    
-    private let contentView = UIView()
-    
     private let coinIcon: UIImageView = {
         let imageview = UIImageView()
         imageview.contentMode = .scaleAspectFit
@@ -38,42 +34,14 @@ final class DetailViewController: UIViewController {
     }()
     
     private let name = CWLabel(text: "Bitcoin", textAlignment: .center, textColor: .label, font: .systemFont(ofSize: 32, weight: .heavy))
-    
     private let symbol = CWLabel(text: "BTC", textAlignment: .center, textColor: .secondaryLabel, font: .systemFont(ofSize: 24, weight: .heavy))
-
-    private let containerView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.backgroundColor = .tertiarySystemBackground
-        
-        return view
-    }()
     
-    private let priceTitleLabel = CWLabel(text: "Price", textAlignment: .left, textColor: .secondaryLabel, font: .preferredFont(forTextStyle: .subheadline))
-    
-    private let priceLabel = CWLabel(text: "54000.6752$", textAlignment: .left, textColor: .label, font: .preferredFont(forTextStyle: .headline))
-    
-    private let changeTitleLabel = CWLabel(text: "Change", textAlignment: .left, textColor: .secondaryLabel, font: .preferredFont(forTextStyle: .subheadline))
-    
-    private let changeLabel = CWLabel(text: "% -3.14", textAlignment: .left, textColor: .systemRed, font: .preferredFont(forTextStyle: .headline))
-    
-    
-    
-    private let linkIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "link")
-        imageView.clipsToBounds = true
-        imageView.tintColor = .secondaryLabel
-        
-        return imageView
-    }()
-    
-    private let linkLabel = CWLabel(text: "Coin Ranking Page", textAlignment: .center, textColor: .secondaryLabel, font: .preferredFont(forTextStyle: .subheadline))
+    private let coinDetailView = CoinDetailView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        
     }
     
     init(coin: Coin) {
@@ -91,22 +59,17 @@ final class DetailViewController: UIViewController {
         configureBackButton()
         configureCoinIcon()
         configureComponents()
+        coinDetailView.configure(with: coin)
         view.backgroundColor = .secondarySystemBackground
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func addViews() {
         view.addSubview(backButton)
-//        view.addSubview(scrollView)
-//        scrollView.addSubview(contentView)
         view.addSubview(coinIcon)
         view.addSubview(name)
         view.addSubview(symbol)
-        view.addSubview(containerView)
-        containerView.addSubview(priceTitleLabel)
-        containerView.addSubview(priceLabel)
-        containerView.addSubview(changeTitleLabel)
-        containerView.addSubview(changeLabel)
+        view.addSubview(coinDetailView)
     }
     
     private func configureLayout() {
@@ -132,34 +95,10 @@ final class DetailViewController: UIViewController {
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(28)
         }
-        containerView.snp.makeConstraints {
+        coinDetailView.snp.makeConstraints {
             $0.top.equalTo(symbol.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(10)
-            $0.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
-        }
-        priceTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
             $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalTo(containerView.snp.centerX).inset(8)
-            $0.height.equalTo(16)
-        }
-        priceLabel.snp.makeConstraints {
-            $0.top.equalTo(priceTitleLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalTo(containerView.snp.centerX).inset(8)
-            $0.height.equalTo(18)
-        }
-        changeTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.leading.equalTo(containerView.snp.centerX)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(16)
-        }
-        changeLabel.snp.makeConstraints {
-            $0.top.equalTo(changeTitleLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(containerView.snp.centerX)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(18)
+            $0.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
     }
     
@@ -176,13 +115,8 @@ final class DetailViewController: UIViewController {
     private func configureComponents() {
         name.text = coin.name
         symbol.text = coin.symbol
-        self.priceLabel.text = String(format: "%05.4f$", Double(coin.price!) ?? 0)
-        let changeComputed = (Double(coin.price!) ?? 0) * (Double(coin.change!) ?? 0) / 100
-        changeLabel.text = String(format: "%%\(coin.change ?? "") (%04.4f$)", changeComputed)
-        if Double(coin.change!) ?? 0 > 0 {
-            changeLabel.textColor = .systemGreen
-        }
     }
+    
     
     // MARK: - Objective Methods
     @objc private func backButtonAction() {

@@ -35,11 +35,8 @@ class TopRankingCell: UICollectionViewCell {
     }()
     
     private let symbolNameLabel = CWLabel(text: "BTC", textAlignment: .left, textColor: .secondaryLabel, font: .systemFont(ofSize: 16, weight: .regular))
-    
-    private let coinNameLabel = CWLabel(text: "Bitcoin", textAlignment: .left, textColor: .label, font: .systemFont(ofSize: 16, weight: .bold))
-    
+    private let coinNameLabel = CWLabel(text: "Bitcoin", textAlignment: .left, textColor: .label, font: .systemFont(ofSize: 18, weight: .bold))
     private let priceLabel = CWLabel(text: "16000$", textAlignment: .right, textColor: .label, font: .systemFont(ofSize: 18, weight: .bold))
-    
     private let changeLabel = CWLabel(text: "-3.6", textAlignment: .right, textColor: .systemRed, font: .systemFont(ofSize: 16, weight: .regular))
     
     // MARK: - inits
@@ -57,12 +54,28 @@ class TopRankingCell: UICollectionViewCell {
         coinIcon.kf.setImage(with: coinUrl)
         self.symbolNameLabel.text = symbolName
         self.coinNameLabel.text = coinName
-        self.priceLabel.text = String(format: "%05.4f$", Double(price) ?? 0)
-        let changeComputed = (Double(price) ?? 0) * (Double(change) ?? 0) / 100
-        self.changeLabel.text = String(format: "%%\(change) (%04.4f$)", changeComputed)
-        if Double(change) ?? 0 > 0 {
-            changeLabel.textColor = .systemGreen
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = Locale(identifier: "en_US")
+
+        if let priceNumber = Double(price) {
+            if priceNumber < 1.1 {
+                let formattedPrice = formatSmallNumber(priceNumber)
+                self.priceLabel.text = "$\(formattedPrice)"
+                numberFormatter.minimumFractionDigits = 8
+            } else {
+                self.priceLabel.text = numberFormatter.string(from: NSNumber(value: priceNumber))
+                numberFormatter.minimumFractionDigits = 3
+            }
         }
+
+        if let changeNumber = Double(change), let priceNumber = Double(price) {
+            let changeComputed = priceNumber * changeNumber / 100
+            self.changeLabel.text = String(format: "%%\(change) (%@)", numberFormatter.string(from: NSNumber(value: changeComputed)) ?? "")
+            self.changeLabel.textColor = changeNumber > 0 ? .systemGreen : .systemRed
+        }
+        
         configureView()
     }
     
@@ -102,7 +115,7 @@ class TopRankingCell: UICollectionViewCell {
         coinNameLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(16)
             $0.leading.equalTo(coinIcon.snp.trailing).offset(16)
-            $0.trailing.equalTo(containerView.snp.centerX).inset(8)
+            $0.trailing.equalTo(containerView.snp.centerX)
             $0.height.equalTo(18)
         }
         priceLabel.snp.makeConstraints {
@@ -115,9 +128,29 @@ class TopRankingCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().inset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.leading.equalTo(containerView.snp.centerX)
-            $0.height.equalTo(18)
+            $0.height.equalTo(20)
         }
     }
+
+    private func formatSmallNumber(_ number: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 8
+        guard let formattedNumber = formatter.string(from: NSNumber(value: number)) else { return "\(number)" }
+        let parts = formattedNumber.split(separator: ".")
+        if parts.count == 2 {
+            let integerPart = parts[0]
+            let fractionalDigits = parts[1]
+            let formattedFractionalPart = fractionalDigits.enumerated().map { index, character -> String in
+                return index < fractionalDigits.count - 1 && character == "0" ? "." : String(character)
+            }.joined()
+            return "\(integerPart).\(formattedFractionalPart)$"
+        }
+        
+        return formattedNumber
+    }
+
     
     // MARK: - Handle reuse
     override func prepareForReuse() {

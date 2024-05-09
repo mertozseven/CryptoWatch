@@ -44,7 +44,7 @@ class CWLabel: UILabel {
     // MARK: - Private Methods
     private func configure() {
         clipsToBounds = true
-        minimumScaleFactor = 0.8
+        minimumScaleFactor = 0.76
         adjustsFontSizeToFitWidth = true
         lineBreakMode = .byTruncatingTail
     }
