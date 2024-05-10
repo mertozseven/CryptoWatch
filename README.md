@@ -99,7 +99,7 @@ Also, make sure that these dependencies are added in your project's target:
 ## Usage Video
 
 <p align="left">
-  <video src="https://github.com/mertozseven/CryptoWatch/assets/75128197/c70e3a36-4f6d-4cbc-a27c-388cd7f2ef57" alt="Usage Video" width="200" height="400">
+  <video src="https://github.com/mertozseven/CryptoWatch/assets/75128197/c70e3a36-4f6d-4cbc-a27c-388cd7f2ef57" alt="Usage" width="200" height="400">
 </p>
 
 ---
