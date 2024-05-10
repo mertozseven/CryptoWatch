@@ -27,7 +27,8 @@ class CWLabel: UILabel {
         backgroundColor: UIColor = .clear,
         cornerRadius: CGFloat = 0,
         isUserInteractionEnabled: Bool = false,
-        numberOfLines: Int = 1
+        numberOfLines: Int = 1,
+        adjustsFontSizeToFitWidth: Bool = true
     ) {
         super.init(frame: .zero)
         self.text = text
@@ -38,6 +39,7 @@ class CWLabel: UILabel {
         self.layer.cornerRadius = cornerRadius
         self.isUserInteractionEnabled = isUserInteractionEnabled
         self.numberOfLines = numberOfLines
+        self.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
         configure()
     }
     

@@ -40,6 +40,7 @@ final class RankingListViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.present(SplashScreenViewController(), animated: true)
         configureView()
     }
     
@@ -56,9 +57,9 @@ final class RankingListViewController: UIViewController {
     private func configureView() {
         addViews()
         configureLayout()
+        getCoins()
         view.backgroundColor = .secondarySystemBackground
         navigationController?.setNavigationBarHidden(true, animated: false)
-        getCoins()
     }
     
     private func addViews() {

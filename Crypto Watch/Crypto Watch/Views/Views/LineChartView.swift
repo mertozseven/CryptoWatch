@@ -9,12 +9,19 @@ import UIKit
 
 class LineChartView: UIView {
     
+    // MARK: - Properties
     private var sparkline: [Double] = []
     
     private var lineColor: UIColor = .label
     
+    // MARK: - UI Components
     private var popupView: UIView?
     
+    private var xOffset: CGFloat {
+        return (self.bounds.width - 32) / CGFloat(sparkline.count - 1)
+    }
+    
+    // MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLongPressGesture()
@@ -25,6 +32,7 @@ class LineChartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Drawing line method
     override func draw(_ rect: CGRect) {
         guard sparkline.count > 1 else { return }
         let path = UIBezierPath()
@@ -49,6 +57,7 @@ class LineChartView: UIView {
         path.stroke()
     }
     
+    // MARK: - Public Methods
     public func setSparklineData(_ data: [String]) {
         self.sparkline = data.compactMap { Double($0) }
         self.setNeedsDisplay()
@@ -58,28 +67,10 @@ class LineChartView: UIView {
         self.lineColor = lineColor
     }
     
-    private var xOffset: CGFloat {
-        return (self.bounds.width - 32) / CGFloat(sparkline.count - 1)
-    }
-    
+    // MARK: - Private Methods
     private func setupLongPressGesture() {
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
         self.addGestureRecognizer(longPressRecognizer)
-    }
-    
-    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
-        let location = gesture.location(in: self)
-        
-        switch gesture.state {
-        case .began:
-            updatePopup(location: location)
-        case .changed:
-            updatePopup(location: location)
-        case .ended:
-            hidePopup()
-        default:
-            break
-        }
     }
     
     private func updatePopup(location: CGPoint) {
@@ -99,7 +90,7 @@ class LineChartView: UIView {
     
     private func showPopup(at location: CGPoint, withValue value: Double) {
         if popupView == nil {
-            popupView = UIView(frame: CGRect(x: location.x - 50, y: location.y - 70, width: 140, height: 50))
+            popupView = UIView(frame: CGRect(x: 0, y: 0, width: 152, height: 50))
             popupView?.backgroundColor = .systemBackground
             popupView?.layer.cornerRadius = 10
             popupView?.layer.shadowOpacity = 0.3
@@ -107,19 +98,44 @@ class LineChartView: UIView {
             popupView?.layer.zPosition = 1
         }
         let valueLabel = UILabel(frame: popupView!.bounds)
-        valueLabel.text = String(format: "%.8f", value)
+        valueLabel.text = String(format: "$%.8f", value)
         valueLabel.textAlignment = .center
         popupView?.addSubview(valueLabel)
-        popupView?.frame.origin = CGPoint(x: location.x - (popupView!.bounds.width / 2), y: location.y - popupView!.bounds.height - 10)
-        if let popupView = popupView {
+        
+        var xPosition = location.x - (popupView!.bounds.width / 2)
+        var yPosition = location.y - popupView!.bounds.height - 10
+        
+        xPosition = max(xPosition, -16) // Left margin
+        xPosition = min(xPosition, UIScreen.main.bounds.width - popupView!.bounds.width - 16) // Right margin
+        yPosition = max(yPosition, -64) // Top margin
+        
+        popupView?.frame.origin = CGPoint(x: xPosition, y: yPosition)
+        
+        if let popupView = popupView, popupView.superview == nil {
             self.addSubview(popupView)
         }
     }
-    
+
     private func hidePopup() {
         popupView?.subviews.forEach { $0.removeFromSuperview() }
         popupView?.removeFromSuperview()
         popupView = nil
+    }
+    
+    // MARK: - Objective Methods
+    @objc private func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        let location = gesture.location(in: self)
+        
+        switch gesture.state {
+        case .began:
+            updatePopup(location: location)
+        case .changed:
+            updatePopup(location: location)
+        case .ended:
+            hidePopup()
+        default:
+            break
+        }
     }
     
 }

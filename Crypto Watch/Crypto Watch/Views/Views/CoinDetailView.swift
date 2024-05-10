@@ -21,65 +21,117 @@ final class CoinDetailView: UIView {
         return view
     }()
     
-    private let priceTitleLabel = CWLabel(text: "Current Price",
-                                          textAlignment: .left,
-                                          textColor: .secondaryLabel,
-                                          font: .preferredFont(forTextStyle: .subheadline))
+    private let priceTitleLabel = CWLabel(
+        text: "Current Price",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let priceLabel = CWLabel(text: "54000.6752$",
-                                     textAlignment: .left,
-                                     textColor: .label,
-                                     font: .preferredFont(forTextStyle: .headline))
+    private let priceLabel = CWLabel(
+        text: "54000.6752$",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
-    private let changeTitleLabel = CWLabel(text: "Change",
-                                           textAlignment: .left,
-                                           textColor: .secondaryLabel,
-                                           font: .preferredFont(forTextStyle: .subheadline))
+    private let changeTitleLabel = CWLabel(
+        text: "Change",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let changeLabel = CWLabel(text: "% -3.14",
-                                      textAlignment: .left,
-                                      textColor: .systemRed,
-                                      font: .preferredFont(forTextStyle: .headline))
+    private let changeLabel = CWLabel(
+        text: "% -3.14",
+        textAlignment: .left,
+        textColor: .systemRed,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
-    private let marketCapTitleLabel = CWLabel(text: "Market Cap",
-                                              textAlignment: .left,
-                                              textColor: .secondaryLabel,
-                                              font: .preferredFont(forTextStyle: .subheadline))
+    private let marketCapTitleLabel = CWLabel(
+        text: "Market Cap",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let marketCapLabel = CWLabel(text: "1064845170034",
-                                         textAlignment: .left,
-                                         textColor: .label,
-                                         font: .preferredFont(forTextStyle: .headline))
+    private let marketCapLabel = CWLabel(
+        text: "1064845170034",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
-    private let dailyVolumeTitleLabel = CWLabel(text: "24 Hours Volume",
-                                                textAlignment: .left,
-                                                textColor: .secondaryLabel,
-                                                font: .preferredFont(forTextStyle: .subheadline))
+    private let dailyVolumeTitleLabel = CWLabel(
+        text: "24 Hours Volume",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let dailyVolumeLabel = CWLabel(text: "39591261551",
-                                           textAlignment: .left,
-                                           textColor: .label,
-                                           font: .preferredFont(forTextStyle: .headline))
+    private let dailyVolumeLabel = CWLabel(
+        text: "39591261551",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
-    private let rankTitleLabel = CWLabel(text: "Rank",
-                                         textAlignment: .left,
-                                         textColor: .secondaryLabel,
-                                         font: .preferredFont(forTextStyle: .subheadline))
+    private let rankTitleLabel = CWLabel(
+        text: "Rank",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let rankLabel = CWLabel(text: "1",
-                                    textAlignment: .left,
-                                    textColor: .label,
-                                    font: .preferredFont(forTextStyle: .headline))
+    private let rankLabel = CWLabel(
+        text: "1",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
-    private let coinRankingTitleLabel = CWLabel(text: "Coin Ranking Page",
-                                                textAlignment: .left,
-                                                textColor: .secondaryLabel,
-                                                font: .preferredFont(forTextStyle: .subheadline))
+    private let coinRankingTitleLabel = CWLabel(
+        text: "Coin Ranking Page",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
     
-    private let coinRankingLabel = CWLabel(text: "https://coinranking.com/coin/Qwsogvtv82FCd+bitcoin-btc",
-                                           textAlignment: .left,
-                                           textColor: .label,
-                                           font: .preferredFont(forTextStyle: .headline))
+    private let coinRankingLabel = CWLabel(
+        text: "https://coinranking.com/coin/Qwsogvtv82FCd+bitcoin-btc",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
+    
+    private let lowestTitleLabel = CWLabel(
+        text: "Lowest",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
+    
+    private let lowestLabel = CWLabel(
+        text: "48000",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
+    
+    private let highestTitleLabel = CWLabel(
+        text: "Highest",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .preferredFont(forTextStyle: .subheadline)
+    )
+    
+    private let highestLabel = CWLabel(
+        text: "48000",
+        textAlignment: .left,
+        textColor: .label,
+        font: .preferredFont(forTextStyle: .headline)
+    )
     
     private let lineChartView = LineChartView()
     
@@ -111,6 +163,10 @@ final class CoinDetailView: UIView {
         containerView.addSubview(priceLabel)
         containerView.addSubview(changeTitleLabel)
         containerView.addSubview(changeLabel)
+        containerView.addSubview(lowestTitleLabel)
+        containerView.addSubview(lowestLabel)
+        containerView.addSubview(highestTitleLabel)
+        containerView.addSubview(highestLabel)
         containerView.addSubview(marketCapTitleLabel)
         containerView.addSubview(marketCapLabel)
         containerView.addSubview(dailyVolumeTitleLabel)
@@ -149,8 +205,30 @@ final class CoinDetailView: UIView {
             $0.leading.trailing.equalTo(changeTitleLabel)
             $0.height.equalTo(20)
         }
-        marketCapTitleLabel.snp.makeConstraints {
+        lowestTitleLabel.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalTo(containerView.snp.centerX).inset(16)
+            $0.height.equalTo(16)
+        }
+        lowestLabel.snp.makeConstraints {
+            $0.top.equalTo(lowestTitleLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(lowestTitleLabel)
+            $0.height.equalTo(20)
+        }
+        highestTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(changeLabel.snp.bottom).offset(16)
+            $0.leading.equalTo(containerView.snp.centerX).offset(8)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(16)
+        }
+        highestLabel.snp.makeConstraints {
+            $0.top.equalTo(highestTitleLabel.snp.bottom).offset(8)
+            $0.leading.trailing.equalTo(highestTitleLabel)
+            $0.height.equalTo(20)
+        }
+        marketCapTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(lowestLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalTo(containerView.snp.centerX).inset(16)
             $0.height.equalTo(16)
@@ -161,7 +239,7 @@ final class CoinDetailView: UIView {
             $0.height.equalTo(20)
         }
         dailyVolumeTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(changeLabel.snp.bottom).offset(16)
+            $0.top.equalTo(highestLabel.snp.bottom).offset(16)
             $0.leading.equalTo(containerView.snp.centerX).offset(8)
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(16)
@@ -173,8 +251,7 @@ final class CoinDetailView: UIView {
         }
         lineChartView.snp.makeConstraints {
             $0.top.equalTo(dailyVolumeLabel.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.bottom.equalToSuperview().inset(16)
+            $0.leading.trailing.bottom.equalToSuperview()
             
         }
     }
@@ -185,7 +262,7 @@ final class CoinDetailView: UIView {
         numberFormatter.locale = Locale(identifier: "en_US")
         
         if let priceNumber = Double(coin?.price ?? "") {
-            if priceNumber < 0.001 {
+            if priceNumber < 1.1 {
                 numberFormatter.minimumFractionDigits = 8
                 priceLabel.text = "$\(formatSmallNumber(priceNumber))"
             } else {
@@ -215,6 +292,32 @@ final class CoinDetailView: UIView {
         if let dailyVolumeNumber = Double(coin?.the24HVolume ?? "") {
             numberFormatter.minimumFractionDigits = 0
             dailyVolumeLabel.text = numberFormatter.string(from: NSNumber(value: dailyVolumeNumber))
+        }
+        
+        if let sparklineStrings = coin?.sparkline {
+            let sparklineDoubles = sparklineStrings.compactMap { Double($0) }
+            
+            if let lowestValue = sparklineDoubles.min() {
+                if lowestValue < 1.1 {
+                    numberFormatter.minimumFractionDigits = 8
+                    lowestLabel.text = "$\(formatSmallNumber(lowestValue))"
+                } else {
+                    numberFormatter.minimumFractionDigits = 3
+                    lowestLabel.text = numberFormatter.string(from: NSNumber(value: lowestValue))
+                }
+            }
+            
+            if let highestValue = sparklineDoubles.max() {
+                if highestValue < 1.1 {
+                    numberFormatter.minimumFractionDigits = 8
+                    highestLabel.text = "$\(formatSmallNumber(highestValue))"
+                } else {
+                    numberFormatter.minimumFractionDigits = 3
+                    highestLabel.text = numberFormatter.string(from: NSNumber(value: highestValue))
+                }
+            }
+            lowestLabel.textColor = .systemRed
+            highestLabel.textColor = .systemGreen
         }
         
         lineChartView.setSparklineData(coin?.sparkline ?? [])

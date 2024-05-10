@@ -10,23 +10,21 @@ import SnapKit
 
 class CWTopNavigationView: UIView {
 
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 44, weight: .black)
-        label.text = "Crypto\nWatch"
-        label.textColor = .label
-        label.numberOfLines = 0
-        
-        return label
-    }()
+    // MARK: - UI Components
+    private let titleLabel = CWLabel(
+        text: "Crypto\nWatch",
+        textAlignment: .left,
+        textColor: .label,
+        font: .systemFont(ofSize: 44, weight: .black),
+        numberOfLines: 0
+    )
     
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .heavy)
-        label.textColor = .secondaryLabel
-        
-        return label
-    }()
+    private let dateLabel = CWLabel(
+        text: "",
+        textAlignment: .left,
+        textColor: .secondaryLabel,
+        font: .systemFont(ofSize: 24, weight: .heavy)
+    )
     
     // MARK: - inits
     override init(frame: CGRect) {

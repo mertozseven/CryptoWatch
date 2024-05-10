@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9601FCE72BE8F4AA006B945C /* CoinResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9601FCE62BE8F4AA006B945C /* CoinResultsViewModel.swift */; };
 		962188372BE6EC98000C4C16 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188362BE6EC98000C4C16 /* DetailViewController.swift */; };
-		962188392BE6F1BF000C4C16 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */; };
+		962188392BE6F1BF000C4C16 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962188382BE6F1BF000C4C16 /* SplashScreenViewController.swift */; };
 		965A5E632BED1A040088790F /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A5E622BED1A040088790F /* CoinDetailView.swift */; };
 		965A5E662BED4A880088790F /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A5E652BED4A880088790F /* LineChartView.swift */; };
 		965DBE072BE4269D00D6F06E /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965DBE062BE4269D00D6F06E /* UIHelper.swift */; };
@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		9601FCE62BE8F4AA006B945C /* CoinResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsViewModel.swift; sourceTree = "<group>"; };
 		962188362BE6EC98000C4C16 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		962188382BE6F1BF000C4C16 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		965A5E622BED1A040088790F /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
 		965A5E652BED4A880088790F /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		965DBE062BE4269D00D6F06E /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 			children = (
 				966D54F02BE2C890007F9EB2 /* RankingListViewController.swift */,
 				962188362BE6EC98000C4C16 /* DetailViewController.swift */,
-				962188382BE6F1BF000C4C16 /* OnboardingViewController.swift */,
+				962188382BE6F1BF000C4C16 /* SplashScreenViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				966D54EF2BE2C890007F9EB2 /* SceneDelegate.swift in Sources */,
 				965A5E632BED1A040088790F /* CoinDetailView.swift in Sources */,
 				966D551A2BE2DF18007F9EB2 /* TopRankingCell.swift in Sources */,
-				962188392BE6F1BF000C4C16 /* OnboardingViewController.swift in Sources */,
+				962188392BE6F1BF000C4C16 /* SplashScreenViewController.swift in Sources */,
 				966795222BE572260042082A /* CoinResults.swift in Sources */,
 				966795262BE577920042082A /* UIColorExtension.swift in Sources */,
 				965A5E662BED4A880088790F /* LineChartView.swift in Sources */,

@@ -151,7 +151,6 @@ class TopRankingCell: UICollectionViewCell {
         return formattedNumber
     }
 
-    
     // MARK: - Handle reuse
     override func prepareForReuse() {
         super.prepareForReuse()
