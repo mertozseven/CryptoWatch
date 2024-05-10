@@ -17,7 +17,7 @@ Welcome to Crypto Watch! Perfect companion for monitoring Crypto Market and tren
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage Video](#usage)
+- [Usage](#usage)
 - [Improvements](#improvements)
 
 ## Features
